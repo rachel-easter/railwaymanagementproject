@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="train_journey_rules.xsl"?>
+<train_journey_rules>
+  <rule>
+    <name>No Smoking</name>
+    <description>Smoking is prohibited in all areas of the train.</description>
+  </rule>
+  <rule>
+    <name>Reserved Seats</name>
+    <description>All passengers must have a reserved seat.</description>
+  </rule>
+  <rule>
+    <name>Baggage Limit</name>
+    <description>Each passenger is allowed to carry a maximum of two pieces of baggage.</description>
+  </rule>
+  <rule>
+    <name>No Alcohol</name>
+    <description>Alcohol consumption is not allowed on the train.</description>
+  </rule>
+  <rule>
+    <name>No Pets</name>
+    <description>Only service animals are allowed on the train.</description>
+  </rule>
+</train_journey_rules>
