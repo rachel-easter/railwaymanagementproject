@@ -1,0 +1,155 @@
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const sessions = require('express-session');
+const http = require('http');
+const parseUrl = require('body-parser');
+const app = express();
+const mysql = require('mysql');
+const path = require('path');
+
+const encodeUrl = parseUrl.urlencoded({ extended: false });
+
+// Session middleware
+app.use(
+  sessions({
+    secret: 'thisismysecrctekey',
+    saveUninitialized: true,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 24 hours
+    resave: false,
+  })
+);
+
+app.use(cookieParser());
+
+const con = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  database: 'myform',
+});
+
+// Serve static files
+//app.use(express.static(path.join(__dirname, 'project_mam')));
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Register page
+app.get('/register.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'register.html'));
+});
+
+app.post('/register', encodeUrl, (req, res) => {
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const userName = req.body.userName;
+  const password = req.body.password;
+
+  con.connect(function (err) {
+    if (err) {
+      console.log(err);
+    }
+
+    // Checking if the user is already registered
+    con.query(
+      `SELECT * FROM users WHERE username = '${userName}' AND password = '${password}'`,
+      function (err, result) {
+        if (err) {
+          console.log(err);
+        }
+
+        if (Object.keys(result).length > 0) {
+          res.sendFile(path.join(__dirname,'failReg.html'));
+        } else {
+          // Inserting new user data
+          const sql = `INSERT INTO users (firstname, lastname, username, password) VALUES ('${firstName}', '${lastName}', '${userName}', '${password}')`;
+          con.query(sql, function (err, result) {
+            if (err) {
+              console.log(err);
+            } else {
+              // Redirect to user page after successful registration
+              userPage();
+            }
+          });
+        }
+      }
+    );
+  });
+
+  function userPage() {
+    // Create a session for the user and store user data in the session
+    req.session.user = {
+      firstname: firstName,
+      lastname: lastName,
+      username: userName,
+      password: password,
+    };
+    res.redirect('/');
+  }
+});
+
+// Login page
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname,'login.html'));
+});
+
+app.post('/login', encodeUrl, (req, res) => {
+  const userName = req.body.userName;
+  const password = req.body.password;
+
+  con.connect(function (err) {
+    if (err) {
+      console.log(err);
+    }
+
+    // Get user data from MySQL database
+    con.query(
+      `SELECT * FROM users WHERE username = '${userName}' AND password = '${password}'`,
+      function (err, result) {
+        if (err) {
+          console.log(err);
+        }
+
+        if (Object.keys(result).length > 0) {
+          // Create a session for the user and store user data in the session
+          req.session.user = {
+            firstname: result[0].firstname,
+            lastname: result[0].lastname,
+            username: userName,
+            password: password,
+          };
+          res.redirect('/booking.html');
+        } else {
+            res.sendFile(path.join(__dirname, 'failLog.html'));
+        }
+      }
+    );
+  });
+});
+
+// Booking page
+app.get('/booking.html', (req, res) => {
+  // Check if the user is logged in
+  if (req.session.user) {
+    res.sendFile(path.join(__dirname, 'booking.html'));
+  } else {
+    res.redirect('/');
+  }
+});
+
+// Logout route
+app.get('/logout', (req, res) => {
+  // Destroy the session and redirect to the login page
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    }
+    res.redirect('/');
+  });
+});
+
+// Start the server
+app.listen(5000, () => {
+  console.log('Server running on port 5000');
+});
+
+         
