@@ -1,0 +1,156 @@
+
+ body .bar{
+    
+    background-image: url('https://assets3.thrillist.com/v1/image/3095876/1584x1056/crop;jpeg_quality=60;progressive.jpg'); 
+    background-repeat: no-repeat;
+    background-size:cover;
+    height:700px;
+    
+
+}
+
+nav a {
+ 
+   margin: 0;
+   padding: 5px;
+   color:black;
+   font-size:0.9rem;
+   text-decoration:none;   
+   text-align:center;  
+   
+ }
+ nav{
+   float:right;  
+ }
+ 
+ .navibar{
+   background-color:rgb(247, 253, 196);
+  height:50px;
+
+ }
+ nav a:hover{
+   color:rgb(255, 0, 64);
+   font-weight:bolder;
+   text-decoration: underline;
+
+ }
+ .hpw{
+   margin-top:200px ;
+   text-align: center;
+   color:#086825;
+ }
+.hpb{
+   background-color: transparent;
+   color:rgb(3, 0, 10);
+   height:40px;
+   width:150px;
+   border-color: #000201;
+}
+.cabus img{
+   float:left;
+   margin-left:200px;
+   margin-right:10px;
+}
+.cabus p{
+   line-height:1;
+   text-align: justify;
+   width:1200px;
+   margin-left:70px;
+      
+   }
+.cabus{
+   text-align:center;
+      }   
+   
+ .babus{
+   background-color: transparent;
+ }    
+ body #contact{
+   background-image: url('https://rare-gallery.com/uploads/posts/3410871-original-night-original-silhouette-sky-stars-train.jpg');
+   background-repeat: no-repeat;
+   background-size: cover;
+color:transparent;
+height:700px;
+}
+.enterinfo input{
+   background-color: transparent;
+   border-color: aliceblue;
+   width:300px;
+   height:30px;
+   text-align: center;
+   margin:10px;
+   margin-left:30px;
+}
+.binfo{
+   background-color: blue;
+   border-color: aliceblue;
+   width:300px;
+   height:30px;
+   text-align: center;
+   margin:10px;
+   margin-left:30px;
+   color:beige;
+}
+.cinfo{
+   color:white;
+   text-align: center;
+}
+/*.all_services {
+   display: flex;
+   flex-direction: row;
+   flex-flow: wrap;
+   margin:auto;
+ }*/
+ 
+ .serve{
+   border: 1px solid gray;
+   display: inline-block;
+   border-radius: 6px;
+   text-align: center;
+   margin:0 auto 0 auto;
+   width: 2in;
+   font-size: 20px;
+   box-shadow: 0 3px 10px rgb(15, 84, 233);
+   margin-left:160px;
+   background-color: cornsilk;
+ }
+ #service{
+   background-image:linear-gradient(to right,rgb(228, 248, 229), rgb(228, 228, 171));
+   box-shadow:0 4px 10px rgb(243, 218, 185);
+ }
+
+ 
+ .s img {
+   height: 35px;
+   align-items: center;
+ }
+ 
+ .skills h6 {
+   align-items: center;
+   font-size: 20px;
+   margin-block-start: 8px;
+   margin-block-end: 5px;
+   font-weight: bold;
+ } 
+ 
+ .skills p {
+   align-items: center;
+   font-size: 15px;
+   color: gray;
+   margin-block-start: 5px;
+   margin-block-end: 5px;
+ } 
+ 
+ .flex_center {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+ }
+.enterinfo input{
+   color:azure;
+}
+/*booking button*/
+.hpb a{
+   text-decoration:none;
+   color:black;
+}
